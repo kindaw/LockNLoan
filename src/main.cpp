@@ -173,6 +173,7 @@ void handleButtons() {
         digitalWrite(relaypin, HIGH);
         delay(10000);
         digitalWrite(relaypin, LOW);
+        currentData = ""; //clear data after sent data
       }
       while (digitalRead(Button_Red) == LOW); // Wait until button is released
     } else if (bluePressed) {
@@ -188,6 +189,7 @@ void handleButtons() {
         digitalWrite(relaypin, HIGH);
         delay(10000);
         digitalWrite(relaypin, LOW);
+        currentData = ""; //clear data after sent data
       }
       while (digitalRead(Button_Blue) == LOW); // Wait until button is released
     }
