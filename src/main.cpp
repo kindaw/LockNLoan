@@ -13,6 +13,7 @@
 #define SCREEN_SDA 22
 #define Button_Red 5
 #define Button_Blue 18
+#define relaypin 27
 
 // telegramBot Setup
 const String Bot_Token = "";
@@ -169,6 +170,9 @@ void handleButtons() {
         sentToTelegram(message);
         updateScreen("Sent Loan Form");
         Serial.println("Sent loan form to Telegram.");
+        digitalWrite(relaypin, HIGH);
+        delay(10000);
+        digitalWrite(relaypin, LOW);
       }
       while (digitalRead(Button_Red) == LOW); // Wait until button is released
     } else if (bluePressed) {
@@ -181,6 +185,9 @@ void handleButtons() {
         sentToTelegram(message);
         updateScreen("Sent Return Form");
         Serial.println("Sent return form to Telegram.");
+        digitalWrite(relaypin, HIGH);
+        delay(10000);
+        digitalWrite(relaypin, LOW);
       }
       while (digitalRead(Button_Blue) == LOW); // Wait until button is released
     }
@@ -217,6 +224,8 @@ void setup()
 
   pinMode(Button_Blue, INPUT_PULLUP);
   pinMode(Button_Red, INPUT_PULLUP);
+  pinMode(relaypin, OUTPUT);
+  digitalWrite(relaypin, LOW);
 }
 
 void loop()
