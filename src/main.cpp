@@ -168,12 +168,13 @@ void handleButtons() {
       } else {
         String message = "loan form \n" + currentData;
         sentToTelegram(message);
-        updateScreen("Sent Loan Form");
-        Serial.println("Sent loan form to Telegram.");
-        digitalWrite(relaypin, HIGH);
-        delay(10000);
+        updateScreen("Sent Loan Form", currentData.c_str());
+        Serial.println("Sent loan form "+ currentData +"s to Telegram.");
         digitalWrite(relaypin, LOW);
+        delay(10000);
+        digitalWrite(relaypin, HIGH);
         currentData = ""; //clear data after sent data
+        updateScreen("ESP32 Ready", "Waiting for data...");
       }
       while (digitalRead(Button_Red) == LOW); // Wait until button is released
     } else if (bluePressed) {
@@ -184,12 +185,13 @@ void handleButtons() {
       } else {
         String message = "return form \n" + currentData;
         sentToTelegram(message);
-        updateScreen("Sent Return Form");
-        Serial.println("Sent return form to Telegram.");
-        digitalWrite(relaypin, HIGH);
-        delay(10000);
+        updateScreen("Sent Return Form", currentData.c_str());
+        Serial.println("Sent return form "+ currentData +"to Telegram.");
         digitalWrite(relaypin, LOW);
+        delay(10000);
+        digitalWrite(relaypin, HIGH);
         currentData = ""; //clear data after sent data
+        updateScreen("ESP32 Ready", "Waiting for data...");
       }
       while (digitalRead(Button_Blue) == LOW); // Wait until button is released
     }
@@ -227,7 +229,7 @@ void setup()
   pinMode(Button_Blue, INPUT_PULLUP);
   pinMode(Button_Red, INPUT_PULLUP);
   pinMode(relaypin, OUTPUT);
-  digitalWrite(relaypin, LOW);
+  digitalWrite(relaypin, HIGH);
 }
 
 void loop()
